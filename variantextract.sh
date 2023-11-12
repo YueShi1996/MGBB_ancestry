@@ -10,9 +10,11 @@
 
 #SBATCH --error=log%J.err 
 
-cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
 
 module load bcftools/1.11
+module load Plink/2.0
+
+cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
 
 for chr in {1..22};do
 
@@ -23,11 +25,9 @@ bcftools view -Oz \
 
 done
 
-bcftools concat -Oz /PHShome/ys724/scratch/pca/chr{1..22}.extracted.vcf.gz > /PHShome/ys724/scratch/pca/allchromosomes_0410.vcf.gz
-
-module load Plink/2.0
-
 cd /PHShome/ys724/scratch/pca/
+
+bcftools concat -Oz chr{1..22}.extracted.vcf.gz > allchromosomes_0410.vcf.gz
 
 plink2 \
   --vcf allchromosomes_0410.vcf.gz \
