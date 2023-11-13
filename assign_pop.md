@@ -7,35 +7,33 @@ cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
 cut -f1 hgdp_tgp_pca_gbmi_snps_loadings.GRCh38.plink.tsv | tail -n +2 > variants.extract
 ```
 
-For each chromosome file, run the following extraction command, then merge
+for each chromosome file, run the following extraction command
 ```
-cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
-
-module load bcftools/1.11
-
-for chr in {1..22};do
-
-bcftools view -Oz \
-  -i “ID = @variants.extract” \
-  /data/biobank_release/datasets/0410/vcf/chr${chr}.dose.vcf.gz \
-  > [/PHShome/ys724/scratch/pca/chr${chr}.extracted.vcf.gz]
-
-done
-
-# merge all chromosomes
-
-bcftools concat -Oz /PHShome/ys724/scratch/pca/chr{1..22}.extracted.vcf.gz > /PHShome/ys724/scratch/pca/allchromosomes_0410.vcf.gz
-
-#convert vcf to plink2 
+folders=("0410" "0411" "0412" "0413")
 
 module load Plink/2.0
 
-cd /PHShome/ys724/scratch/pca/
+for fl in "${folders[@]}"; do
+
+tmpdir=/PHShome/ys724/scratch/PCA/${fl}
+mkdir ${tmpdir}
+cd /data/biobank_release/datasets/${fl}/vcf
+
+for chr in $(seq 1 22);do
 
 plink2 \
-  --vcf allchromosomes_0410.vcf.gz \
+  --vcf chr${chr}.dose.vcf.gz \
   dosage=DS \
   --make-pfile \
-  --out allchromosomes_0410
+  --extract /PHShome/ys724/Documents/GMBI_endometriosis/pca/variants.extract \
+  --out ${tmpdir}/chr${chr}_dosage_extract
+
+zcat chr${chr}.info.gz | awk '$7 > 0.3 {print $1}' >  ${tmpdir}/chr${chr}_info_0.3.snplist
+  
+done
+done
+```
+
+merge all chromosomes 
 
 ```
