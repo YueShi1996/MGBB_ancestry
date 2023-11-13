@@ -1,5 +1,5 @@
-#### Variants extraction
-# Variant list
+### Variants extraction
+
 first extract a variant list from the pre-computed loadings file for filtering
 ```
 cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
@@ -7,8 +7,7 @@ cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
 cut -f1 hgdp_tgp_pca_gbmi_snps_loadings.GRCh38.plink.tsv | tail -n +2 > variants.extract
 ```
 
-# Extract variants from vcf files
-For each chromosome file, run the following extraction command
+For each chromosome file, run the following extraction command, then merge
 ```
 cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
 
@@ -22,17 +21,13 @@ bcftools view -Oz \
   > [/PHShome/ys724/scratch/pca/chr${chr}.extracted.vcf.gz]
 
 done
-```
 
-merge all chromosomes
+# merge all chromosomes
 
-```
 bcftools concat -Oz /PHShome/ys724/scratch/pca/chr{1..22}.extracted.vcf.gz > /PHShome/ys724/scratch/pca/allchromosomes_0410.vcf.gz
-```
 
-convert vcf to plink2 
+#convert vcf to plink2 
 
-```
 module load Plink/2.0
 
 cd /PHShome/ys724/scratch/pca/
