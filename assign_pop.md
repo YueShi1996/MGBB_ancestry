@@ -1,12 +1,13 @@
-#### Make a variant list
-To avoid creating too big dosage files, we first extract a variant list from the pre-computed loadings file for filtering.
+#### Variants extraction
+### Variant list
+first extract a variant list from the pre-computed loadings file for filtering
 ```
 cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
 
 cut -f1 hgdp_tgp_pca_gbmi_snps_loadings.GRCh38.plink.tsv | tail -n +2 > variants.extract
 ```
 
-#### Extract variants from vcf files
+### Extract variants from vcf files
 For each chromosome file, run the following extraction command
 ```
 cd /PHShome/ys724/Documents/GMBI_endometriosis/pca/
