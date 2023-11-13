@@ -109,4 +109,4 @@ npc=6
 pop_pred <- as.data.table(pop_forest(training_data = trdat, data = tedat))
 table(pop_pred$predicted_pop)
 write.csv(pop_pred, "/Users/shiyue/Desktop/Ancestry/pop_pred.csv")
-```R
+```
