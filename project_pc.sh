@@ -1,3 +1,15 @@
+#!/bin/bash 
+
+#SBATCH --job-name=vcfextract 
+
+#SBATCH --partition=long 
+
+#SBATCH --ntasks=1 
+
+#SBATCH --output=log%J.out 
+
+#SBATCH --error=log%J.err 
+
 cd /PHShome/ys724/scratch/pca/merge/
 mkdir /PHShome/ys724/scratch/pca/projectpc
 
