@@ -1,4 +1,14 @@
+#!/bin/bash 
 
+#SBATCH --job-name=mergefolder 
+
+#SBATCH --partition=long 
+
+#SBATCH --ntasks=1 
+
+#SBATCH --output=log%J.out 
+
+#SBATCH --error=log%J.err 
 
 cd /PHShome/ys724/scratch/pca/merge/
 
