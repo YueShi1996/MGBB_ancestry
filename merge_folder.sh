@@ -32,7 +32,7 @@ plink2 \
   --keep-allele-order \
   --pfile ${fl}_merge \
   --extract common_all.txt \
-  --make-pgen \
+  --make-pfile \
   --out ${fl}_common
   
 done
@@ -40,4 +40,4 @@ done
 ls *_common.pgen | sed -e 's/.pgen//' > merge.txt
 
 # merge datasets
-/PHShome/ys724/software/plink2 --pmerge-list merge.txt --make-pgen --out MGBB
+/PHShome/ys724/software/plink2 --pmerge-list merge.txt --make-pfile --out MGBB
