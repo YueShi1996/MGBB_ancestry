@@ -31,14 +31,12 @@ plink2 \
   --keep-allele-order \
   --pfile ${fl}_merge \
   --extract common_all.txt \
+  --make-pfile \
   --out ${fl}_common
   
 done
 
-ls *_common.pgen | sed -e 's/.pgen//' > merge-list.txt
-
-echo dataset_A_common > merge.txt
-echo dataset_B_common >> merge.txt
+ls *_common.pgen | sed -e 's/.pgen//' > merge.txt
 
 # merge datasets
 plink --merge-list merge.txt --make-bed --out dataset_merge
