@@ -28,8 +28,20 @@ module load Plink/2.0
 for fl in "${folders[@]}"; do
 
 plink2 \
+  --keep-allele-order \
   --pfile ${fl}_merge \
   --extract common_all.txt \
   --out ${fl}_common
   
 done
+
+ls *_common.pgen | sed -e 's/.pgen//' > merge-list.txt
+
+echo dataset_A_common > merge.txt
+echo dataset_B_common >> merge.txt
+
+# merge datasets
+plink --merge-list merge.txt --make-bed --out dataset_merge
+
+# filter out SNP with low freq and low genotyping rate 
+plink --maf 0.01 --geno 0.05 --hwe 0.00001 --bfile dataset_merge --out dataset_merge
