@@ -32,7 +32,7 @@ plink2 \
   --keep-allele-order \
   --pfile ${fl}_merge \
   --extract common_all.txt \
-  --make-pfile \
+  --make-bed \
   --out ${fl}_common
   
 done
