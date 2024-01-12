@@ -36,20 +36,20 @@ done
 
 merge all chromosomes 
 ```
-mkdir /PHShome/ys724/scratch/pca/merge/
+mkdir /PHShome/ys724/scratch/PCA/merge/
 
 folders=("0410" "0411" "0412" "0413")
 
 for fl in "${folders[@]}"; do
-cd /PHShome/ys724/scratch/pca/${fl}
+cd /PHShome/ys724/scratch/PCA/${fl}
 	ls chr*.pgen | sed -e 's/.pgen//' > merge-list_${fl}.txt
-	/PHShome/ys724/software/plink2 --pmerge-list merge-list_${fl}.txt --out /PHShome/ys724/scratch/pca/merge/${fl}_merge    
+	/PHShome/ys724/software/plink2 --pmerge-list merge-list_${fl}.txt --out /PHShome/ys724/scratch/PCA/merge/${fl}_merge    
 done
 ```
 
 merge different folders
 ```
-cd /PHShome/ys724/scratch/pca/merge/
+cd /PHShome/ys724/scratch/PCA/merge/
 
 folders=("0410" "0411" "0412" "0413")
 
@@ -65,8 +65,8 @@ comm -12 common_0410_0411_0412.txt 0413_snplist_sorted.txt > common_all.txt
 
 ### Project PC
 ```
-cd /PHShome/ys724/scratch/pca/merge/
-mkdir /PHShome/ys724/scratch/pca/projectpc
+cd /PHShome/ys724/scratch/PCA/merge/
+mkdir /PHShome/ys724/scratch/PCA/projectpc
 
 plink2 \
   --pfile 0410_merge \
